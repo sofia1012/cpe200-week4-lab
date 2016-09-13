@@ -11,18 +11,47 @@ public class User {
     }
 
     public boolean setUserName(String name) {
-        return false;
+        if (!name.matches("(^[a-zA-Z]+)([a-zA-Z0-9]*)")) {
+            return false;
+        }
+        if(name.length()<8){
+            return false;
+        }
+
+        userName=name;
+        return true;
     }
 
     public boolean setPassword(String name) {
-        return false;
+        int connect = 0;
+        if (name.length() < 12) {
+            return false;
+        }
+        if (name.length() >= 12) {
+            connect++;
+        }
+        if (name.matches("(.*)([0-9]+)(.*)")) {
+            connect++;
+        }
+        if (name.matches("(.*)([a-z]+)(.*)")) {
+            connect++;
+        }
+        if (name.matches("(.*)([A-Z]+)(.*)")) {
+            connect++;
+        }
+        if (connect == 4) {
+            password = name;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getUserName() {
-        return null;
+        return userName;
     }
 
     public String getPassword() {
-        return null;
+        return password;
     }
 }
